@@ -1,23 +1,13 @@
-# - name: " starting and enabling "
-#   ansible.builtin.service:
-#     name: nginx
-#     state: started
-#     enabled: yes
-
-
-# - name: " restart nginx "
-#   ansible.builtin.service: 
-#     name: nginx
-#     state: restarted
-
-
-- name: starting
+- name: starting and enabling
   ansible.builtin.service:
     name: nginx
     state: started
     enabled: yes
 
+
 - name: restart
   ansible.builtin.service: 
     name: nginx
     state: restarted
+
+
