@@ -1,0 +1,5 @@
+- name : mysql file for the expense project
+  hosts: mysql
+  become: yes
+  roles:
+    -mysql

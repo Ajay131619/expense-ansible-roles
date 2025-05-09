@@ -1,0 +1,32 @@
+  - name: "download mysql server"
+    ansible.builtin.command: " dnf install mysql-server -y "
+
+  - name: "starting and enabling the service"
+    ansible.builtin.command: " systemctl start mysqld "
+
+  - name: "enabling the mysql server"
+    ansible.builtin.command: " systemctl enable mysqld "
+
+  - name: installing the required packages
+    ansible.builtin.pip:
+      name:
+      - PyMySQL
+      - cryptography
+      executable: pip3.9
+  
+  - name: "login into mysql server "
+    community.mysql.mysql_info:
+      login_user: "{{ user }}"
+      login_password: "{{ password }}"
+      login_host: "{{ hst }}"
+    ignore_errors: true
+    register: mysql
+  
+  - name: printing the mysql information
+    ansible.builtin.debug:
+      msg : "{{ mysql }}"
+
+  - name: "setting the password and the user"
+    ansible.builtin.command: " mysql_secure_installation --set-{{ user }}-pass {{ password }}"
+    when: mysql.failed is true
+    
