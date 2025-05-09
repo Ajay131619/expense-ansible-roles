@@ -3,8 +3,7 @@
     name: 
       - nginx
     state: present
-  notify: 
-    - starting and enabling
+  notify: " starting and enabling "
 
 - name: removing previous nginx directory
   ansible.builtin.file:
@@ -31,5 +30,4 @@
   ansible.builtin.template:
     src: expense.conf.j2
     dest: /etc/nginx/default.d/expense.conf
-  notify: 
-    - restart nginx
+  notify: " restart nginx "
