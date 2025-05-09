@@ -4,7 +4,7 @@
       - nginx
     state: present
   notify: starting and enabling
-  
+
 - name: removing previous nginx directory
   ansible.builtin.file:
     path: /usr/share/nginx/html
