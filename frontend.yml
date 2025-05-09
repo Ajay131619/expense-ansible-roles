@@ -1,0 +1,5 @@
+- name: frontend file for the expense project
+  hosts: frontend
+  become: yes
+  roles:
+    - frontend
