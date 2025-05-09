@@ -8,9 +8,9 @@
       ansible.builtin.package:
         name: "{{ item }}"
         state: present
-        loop: 
-          - mysql
-          - nodejs
+      loop: 
+        - mysql
+        - nodejs
 
     - name: " installing pip modules "
       ansible.builtin.pip:
