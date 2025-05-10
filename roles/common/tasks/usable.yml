@@ -1,16 +1,16 @@
 - name: deleting the already existing folder
   ansible.builtin.file:
-    path: {{ path }}
+    path: "{{ path }}"
     state: absent
   ignore_errors: true
 
 - name: creating the required folder
   ansible.builtin.file:
-    path: {{ path }}
+    path: "{{ path }}"
     state: directory
 
 - name: downloading the data to the created folder
   ansible.builtin.unarchive:
     src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-{{ layer }}-v2.zip
-    dest: {{ path }}
+    dest: "{{ path }}"
   remote_src: yes
