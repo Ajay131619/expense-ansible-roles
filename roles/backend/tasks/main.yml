@@ -1,51 +1,51 @@
-    - name: " disabling node.js "
-      ansible.builtin.command: " dnf module disable nodejs -y "
+- name: " disabling node.js "
+  ansible.builtin.command: " dnf module disable nodejs -y "
 
-    - name: " enabling node.js version20 "
-      ansible.builtin.command: " dnf module enable nodejs:20 -y "
+- name: " enabling node.js version20 "
+  ansible.builtin.command: " dnf module enable nodejs:20 -y "
 
-    - name: " install node.js "
-      ansible.builtin.package:
-        name: "{{ item }}"
-        state: present
-      loop: 
-        - mysql
-        - nodejs
+- name: " install node.js "
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop: 
+    - mysql
+    - nodejs
 
-    - name: " installing pip modules "
-      ansible.builtin.pip:
-        name: 
-         - PyMySQL
-         - cryptography
-        executable: pip3.9
+- name: " installing pip modules "
+  ansible.builtin.pip:
+    name: 
+      - PyMySQL
+      - cryptography
+    executable: pip3.9
 
-    - name: Create a user 'expense' with a home directory
-      ansible.builtin.user:
-        name: expense
+- name: Create a user 'expense' with a home directory
+  ansible.builtin.user:
+    name: expense
 
-    - name: using the ansible common role
-      ansible.builtin.import_role:
-        name: common
-        tasks_from: reusable_file.yml
-    
-    - name: " downloading dependencies "
-      ansible.builtin.command: " npm install "
-      args:
-        chdir: /app
-    
-    - name: "copy the backend service file"
-      ansible.builtin.template:
-        src: backend.service.j2
-        dest: /etc/systemd/system/backend.service
-      notify: 
-        - daemon reload
+- name: using the ansible common role
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: reusable_file.yml
 
-    - name: " importing the backend.sql "
-      community.mysql.mysql_db:
-        login_user: "{{ user }}"
-        login_password: "{{ password }}"
-        login_host: "{{ hst }}"
-        target: /app/schema/backend.sql
-        name: all
-        state: import
+- name: " downloading dependencies "
+  ansible.builtin.command: " npm install "
+  args:
+    chdir: /app
+
+- name: "copy the backend service file"
+  ansible.builtin.template:
+    src: backend.service.j2
+    dest: /etc/systemd/system/backend.service
+  notify: 
+    - daemon reload
+
+- name: " importing the backend.sql "
+  community.mysql.mysql_db:
+    login_user: "{{ user }}"
+    login_password: "{{ password }}"
+    login_host: "{{ hst }}"
+    target: /app/schema/backend.sql
+    name: all
+    state: import
       

@@ -2,7 +2,7 @@
   ansible.builtin.file:
     path: {{ path }}
     state: absent
-  ignore errors: true
+  ignore_errors: true
 
 - name: creating the required folder
   ansible.builtin.file:
