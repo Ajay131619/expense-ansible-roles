@@ -2,6 +2,6 @@ password: "ExpenseApp@1"
 hst: "mysql.ajaru.shop"
 user: "root"  
 
-path: /app
+path: "/app"
 
-layer: backend
+layer: "backend"
