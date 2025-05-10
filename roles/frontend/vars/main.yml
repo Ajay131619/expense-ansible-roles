@@ -1,1 +1,4 @@
 record_name: backend.ajaru.shop
+path: /usr/share/nginx/html
+
+layer: frontend

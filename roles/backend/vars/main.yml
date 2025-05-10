@@ -1,3 +1,7 @@
 password: "ExpenseApp@1"
 hst: "mysql.ajaru.shop"
 user: "root"  
+
+path: /app
+
+layer: backend
